@@ -1,14 +1,29 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:gorilla_hash/bloc/general/general_bloc.dart';
 import 'package:gorilla_hash/config/routes/index.dart';
 import 'package:gorilla_hash/config/style/theme/index.dart';
-import 'package:gorilla_hash/utilities/providers/index.dart';
-import 'package:provider/provider.dart';
 
 void main() async {
-/*   await dotenv.load(fileName: ".env");
- */
+/*   await dotenv.load(fileName: ".env"); */
   runApp(const MyApp());
+}
+
+class AppState extends StatelessWidget {
+  const AppState({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<GeneralBloc>(
+          create: (context) => GeneralBloc(),
+        ),
+      ],
+      child: const MyApp(),
+    );
+  }
 }
 
 class MyApp extends StatelessWidget {
@@ -16,16 +31,13 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MultiProvider(
-      providers: getProviders(),
-      child: MaterialApp(
-        routes: getRoutes(context),
-        theme: getThemeData(),
-        home: Container(
-          child: const Text(
-            'Hello World',
-            style: TextStyle(color: Colors.white, fontFamily: '300'),
-          ),
+    return MaterialApp(
+      routes: getRoutes(context),
+      theme: getThemeData(),
+      home: Container(
+        child: const Text(
+          'Hello Worldd',
+          style: TextStyle(color: Colors.white, fontFamily: '300'),
         ),
       ),
     );
