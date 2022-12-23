@@ -6,8 +6,8 @@ import 'package:gorilla_hash/utilities/providers/index.dart';
 import 'package:provider/provider.dart';
 
 void main() async {
-  await dotenv.load(fileName: ".env");
-
+/*   await dotenv.load(fileName: ".env");
+ */
   runApp(const MyApp());
 }
 
@@ -21,7 +21,12 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         routes: getRoutes(context),
         theme: getThemeData(),
-        home: Container(),
+        home: Container(
+          child: const Text(
+            'Hello World',
+            style: TextStyle(color: Colors.white, fontFamily: '300'),
+          ),
+        ),
       ),
     );
   }
