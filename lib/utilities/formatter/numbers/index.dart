@@ -1,4 +1,5 @@
 import 'package:currency_text_input_formatter/currency_text_input_formatter.dart';
+import 'package:intl/intl.dart';
 
 class NumberFormatter {
   String addZeroToFormat(int number, {bool addZeroToZero = false}) {
@@ -34,5 +35,35 @@ class NumberFormatter {
     }
 
     return '${(number / 1000000000).toStringAsFixed(1)}B';
+  }
+}
+
+formatNumber(number) {
+  try {
+    dynamic formatter = NumberFormat('#,###.00');
+
+    if (number.runtimeType.toString() == 'String') {
+      if (number == '0') return '0.00';
+      return formatter.format(double.parse(number));
+    } else {
+      if (number == 0) return '0.00';
+      return formatter.format(number);
+    }
+  } catch (e) {
+    return '';
+  }
+}
+
+formatNumberNoDecimals(number) {
+  try {
+    dynamic formatter = NumberFormat('#,###');
+
+    if (number.runtimeType.toString() == 'String') {
+      return formatter.format(double.parse(number));
+    } else {
+      return formatter.format(number);
+    }
+  } catch (e) {
+    return '';
   }
 }

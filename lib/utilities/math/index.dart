@@ -12,3 +12,24 @@ class MathUtils {
     return result.isInfinite || result.isNaN ? '0' : result.toStringAsFixed(1);
   }
 }
+
+calculateGananceP2P({btcArs, btcUsd, dolarModal}) {
+  double result = 0;
+  double dolarBtc = btcArs / btcUsd;
+
+  result = dolarBtc * 1.01;
+
+  result = (((result / dolarModal) - 1) * 100) * -1;
+
+  return result;
+}
+
+calculatePriceOffer({btcArs, btcUsd}) {
+  double result = 0;
+
+  double dolarBtc = btcArs / btcUsd;
+
+  result = dolarBtc * 1.01;
+
+  return result;
+}

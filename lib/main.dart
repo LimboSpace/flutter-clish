@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:gorilla_hash/bloc/general/general_bloc.dart';
 import 'package:gorilla_hash/config/routes/index.dart';
 import 'package:gorilla_hash/config/style/theme/index.dart';
+import 'package:gorilla_hash/pages/p2p/index.dart';
 
 void main() async {
 /*   await dotenv.load(fileName: ".env"); */
@@ -34,12 +34,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       routes: getRoutes(context),
       theme: getThemeData(),
-      home: Container(
-        child: const Text(
-          'Hello Worldd',
-          style: TextStyle(color: Colors.white, fontFamily: '300'),
-        ),
-      ),
+      home: Container(child: p2pScreen()),
     );
   }
 }
