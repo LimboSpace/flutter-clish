@@ -24,8 +24,10 @@ class OffersCubit extends Cubit<OffersState> {
           .get('https://localbitcoins.com/sell-bitcoins-online/ars/.json');
 
       List offerList = response.data['data']['ad_list'];
+      double minVolume = double.parse(response.data['data']['min_amount']);
 
       emit(state.copyWith(allOffers: offerList));
+      emit(state.copyWith(minVolume: minVolume));
       return response.data['data']['ad_list'];
     } catch (e) {
       if (e is DioError) {
