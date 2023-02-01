@@ -1,8 +1,13 @@
 // ignore_for_file: non_constant_identifier_names, camel_case_types
 
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:gorilla_hash/bloc/cubit/offers_cubit.dart';
+
 import 'package:gorilla_hash/components/animations/number/index.dart';
 import 'package:gorilla_hash/components/elements/statusOnline/container/index.dart';
 import 'package:gorilla_hash/components/p2p/item.dart';
@@ -42,6 +47,8 @@ class _p2pScreenState extends State<p2pScreen> {
             relevantVolumeController: relevantVolumeController));
   }*/
 
+  dispatchp2pScreen() async {}
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -50,66 +57,71 @@ class _p2pScreenState extends State<p2pScreen> {
   }
 
   Widget Page() {
-    return SafeArea(
-      child: Container(
-        padding: const EdgeInsets.only(top: 20, left: 15, right: 15),
-        child: Column(
-          children: [
-            Header(),
-            HeaderTable(),
-            BitcoinPrice(),
-            const SizedBox(
-              height: 10,
-            ),
-            if (minVolume != 0)
-              (Column(
-                children: [
-                  Row(
+    return BlocBuilder<OffersCubit, OffersState>(
+      builder: (context, state) {
+        log('state: ${state.allOffers.toString()}');
+        return SafeArea(
+          child: Container(
+            padding: const EdgeInsets.only(top: 20, left: 15, right: 15),
+            child: Column(
+              children: [
+                Header(),
+                HeaderTable(),
+                BitcoinPrice(),
+                const SizedBox(
+                  height: 10,
+                ),
+                if (minVolume != 0)
+                  (Column(
                     children: [
-                      const Text('Volumen relevante mínimo: '),
-                      Text(
-                        formatNumber(minVolume),
+                      Row(
+                        children: [
+                          const Text('Volumen relevante mínimo: '),
+                          Text(
+                            formatNumber(minVolume),
+                          )
+                        ],
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Text('Ocultar los inválidos:',
+                              style: TextStyle(color: gc(context).primary)),
+                          Switch(
+                            value: showInvalids,
+                            onChanged: (boool) {
+                              setState(() {
+                                showInvalids = !showInvalids;
+                              });
+                            },
+                            activeTrackColor: Colors.black,
+                            inactiveTrackColor: Colors.black,
+                            activeColor: gc(context).primary,
+                          ),
+                        ],
                       )
                     ],
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Text('Ocultar los inválidos:',
-                          style: TextStyle(color: gc(context).primary)),
-                      Switch(
-                        value: showInvalids,
-                        onChanged: (boool) {
-                          setState(() {
-                            showInvalids = !showInvalids;
-                          });
-                        },
-                        activeTrackColor: Colors.black,
-                        inactiveTrackColor: Colors.black,
-                        activeColor: gc(context).primary,
-                      ),
-                    ],
-                  )
-                ],
-              )),
-            Column(
-              children: [
-                for (dynamic i = 0; i < offers.length; i++)
-                  (P2pOfferItem(
-                    offer: offers[i],
-                    btcPrice: btcPrice,
-                    dolarModal: dolarModal,
-                    minVolume: minVolume,
-                    showInvalids: showInvalids,
                   )),
+                Column(
+                  children: [
+                    for (dynamic i = 0; i < offers.length; i++)
+                      (P2pOfferItem(
+                        offer: offers[i],
+                        btcPrice: btcPrice,
+                        dolarModal: dolarModal,
+                        minVolume: minVolume,
+                        showInvalids: showInvalids,
+                      )),
+                  ],
+                ),
+                const SizedBox(
+                  height: 100,
+                ),
               ],
             ),
-            const SizedBox(
-              height: 100,
-            ),
-          ],
-        ),
-      ),
+          ),
+        );
+      },
     );
   }
 

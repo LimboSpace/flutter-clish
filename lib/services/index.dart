@@ -5,9 +5,7 @@ import 'package:gorilla_hash/utilities/storage/index.dart';
 Dio getDio() {
   Dio dio = Dio();
 
-  dio.options.baseUrl = "https://jsonplaceholder.typicode.com";
-
-  dio.interceptors.add(dioInterceptors());
+/* dio.interceptors.add(dioInterceptors()); */
 
   return dio;
 }
