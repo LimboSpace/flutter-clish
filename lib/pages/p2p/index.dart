@@ -47,10 +47,16 @@ class _p2pScreenState extends State<p2pScreen> {
             relevantVolumeController: relevantVolumeController));
   }*/
 
-  dispatchp2pScreen() async {}
+  void dispatchp2pScreen() async {
+    final blocProvider = BlocProvider.of<OffersCubit>(context);
+    final response = await blocProvider.getp2pOffers(context);
+
+/*     log('response: ${response.toString()}'); */
+  }
 
   @override
   Widget build(BuildContext context) {
+    dispatchp2pScreen();
     return Scaffold(
       body: Page(),
     );
