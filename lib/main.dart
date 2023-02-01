@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gorilla_hash/bloc/general/general_bloc.dart';
+import 'package:gorilla_hash/bloc/cubit/offers_cubit.dart';
 import 'package:gorilla_hash/config/routes/index.dart';
 import 'package:gorilla_hash/config/style/theme/index.dart';
 import 'package:gorilla_hash/pages/p2p/index.dart';
 
 void main() async {
 /*   await dotenv.load(fileName: ".env"); */
-  runApp(const MyApp());
+  runApp(const AppState());
 }
 
 class AppState extends StatelessWidget {
@@ -17,9 +17,7 @@ class AppState extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider<GeneralBloc>(
-          create: (context) => GeneralBloc(),
-        ),
+        BlocProvider(create: (context) => OffersCubit()),
       ],
       child: const MyApp(),
     );

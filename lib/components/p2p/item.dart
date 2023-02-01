@@ -20,7 +20,8 @@ class P2pOfferItem extends StatefulWidget {
   bool? showInvalids;
   double? minVolume;
   P2pOfferItem(
-      {this.minVolume,
+      {super.key,
+      this.minVolume,
       this.showInvalids,
       required this.offer,
       required this.btcPrice,
