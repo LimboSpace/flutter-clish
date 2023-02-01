@@ -5,7 +5,7 @@ class OffersState extends Equatable {
     this.allOffers, {
     this.showInvalids = true,
     this.btcPrice = 0,
-    this.dolarModal = 0,
+    this.dolarModal = '',
     this.minVolume = 0,
     this.lastUpdate = 0,
   });
@@ -14,15 +14,25 @@ class OffersState extends Equatable {
   List? allOffers;
   bool showInvalids;
   double btcPrice;
-  double dolarModal;
+  String dolarModal;
   double minVolume;
   int lastUpdate;
 
   OffersState copyWith({
     List? allOffers,
+    bool? showInvalids,
+    double? btcPrice,
+    double? minVolume,
+    int? lastUpdate,
+    String? dolarModal,
   }) {
     return OffersState(
       allOffers ?? this.allOffers,
+      showInvalids: showInvalids ?? this.showInvalids,
+      btcPrice: btcPrice ?? this.btcPrice,
+      dolarModal: dolarModal ?? this.dolarModal,
+      minVolume: minVolume ?? this.minVolume,
+      lastUpdate: lastUpdate ?? this.lastUpdate,
     );
   }
 
