@@ -58,7 +58,7 @@ class OffersCubit extends Cubit<OffersState> {
       Response response = await dio
           .get('https://mercados.ambito.com//dolar/informal/variacion');
 
-      String dolar = response.data['compra'];
+      double dolar = double.parse(response.data['compra']);
       emit(state.copyWith(dolarModal: dolar));
     } catch (e) {
       if (e is DioError) {}

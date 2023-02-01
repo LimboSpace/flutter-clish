@@ -5,7 +5,7 @@ class OffersState extends Equatable {
     this.allOffers, {
     this.showInvalids = true,
     this.btcPrice = 0,
-    this.dolarModal = '',
+    this.dolarModal = 0,
     this.minVolume = 0,
     this.lastUpdate = 0,
   });
@@ -14,7 +14,7 @@ class OffersState extends Equatable {
   List? allOffers;
   bool showInvalids;
   double btcPrice;
-  String dolarModal;
+  double dolarModal;
   double minVolume;
   int lastUpdate;
 
@@ -24,7 +24,7 @@ class OffersState extends Equatable {
     double? btcPrice,
     double? minVolume,
     int? lastUpdate,
-    String? dolarModal,
+    double? dolarModal,
   }) {
     return OffersState(
       allOffers ?? this.allOffers,
