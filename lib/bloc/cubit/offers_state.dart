@@ -11,7 +11,7 @@ class OffersState extends Equatable {
   });
   OffersState.init() : this(null);
 
-  final List? allOffers;
+  List? allOffers;
   bool showInvalids;
   double btcPrice;
   double dolarModal;

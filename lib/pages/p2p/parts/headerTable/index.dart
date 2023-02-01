@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gorilla_hash/components/elements/inputs/search.dart';
 import 'package:gorilla_hash/utilities/shortcuts/index.dart';
 
 class HeaderTable extends StatefulWidget {
@@ -11,25 +12,22 @@ class HeaderTable extends StatefulWidget {
 class _HeaderTableState extends State<HeaderTable> {
   @override
   Widget build(BuildContext context) {
+    TextEditingController searchController = TextEditingController();
+
     return Container(
       margin: const EdgeInsets.only(top: 20, left: 10, right: 10),
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(15),
           color: const Color(0xffFFF8E7)),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Expanded(
-            flex: 3,
-            child: Container(
-              padding: const EdgeInsets.only(top: 10, bottom: 10),
-              child: Center(
-                  child: Text(
-                'Cambio',
-                style: TextStyle(
-                    color: gc(context).surface, fontWeight: FontWeight.bold),
-              )),
-            ),
+          Container(
+            padding: const EdgeInsets.only(top: 10, bottom: 10),
+            child: InputSearch(
+                width: mq(context).width * 0.45,
+                controller: searchController,
+                onSubmit: () {}),
           ),
           Expanded(
             flex: 6,

@@ -15,3 +15,7 @@ String dollarCharacter() {
 ColorScheme gc(context) {
   return Theme.of(context).colorScheme;
 }
+
+Size mq(context) {
+  return MediaQuery.of(context).size;
+}
