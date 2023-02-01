@@ -16,7 +16,7 @@ class _HeaderState extends State<Header> {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      height: 70,
+      height: 80,
       decoration: const BoxDecoration(
           color: Color(0xff5B67CA),
           image: DecorationImage(
