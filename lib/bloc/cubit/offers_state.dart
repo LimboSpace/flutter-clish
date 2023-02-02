@@ -37,5 +37,6 @@ class OffersState extends Equatable {
   }
 
   @override
-  List<Object> get props => [allOffers];
+  List<Object> get props =>
+      [allOffers, showInvalids, btcPrice, minVolume, lastUpdate, dolarModal];
 }

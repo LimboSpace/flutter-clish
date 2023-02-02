@@ -124,7 +124,7 @@ class _P2pOfferItemState extends State<P2pOfferItem> {
                                             suffix: dollarCharacter(),
                                             textStyle: const TextStyle(
                                                 fontWeight: FontWeight.bold),
-                                            number: tempPrice),
+                                            number: price),
                                         Text(
                                           offer['profile']['username'],
                                           style: const TextStyle(

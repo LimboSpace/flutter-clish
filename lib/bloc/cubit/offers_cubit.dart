@@ -25,18 +25,13 @@ class OffersCubit extends Cubit<OffersState> {
 
       List offerList = response.data?['data']?['ad_list'] ?? [];
 
-      log(offerList.length.toString());
-
       double minVolume =
           double.parse(response.data?['data']?['min_amount'] ?? '0');
 
       emit(state.copyWith(allOffers: offerList));
       emit(state.copyWith(minVolume: minVolume));
     } catch (e) {
-      log('e $e');
-      if (e is DioError) {
-        log('e.response?.data');
-      }
+      if (e is DioError) {}
     }
   }
 
@@ -48,14 +43,9 @@ class OffersCubit extends Cubit<OffersState> {
 
       double btcPrice = double.parse(response.data['price']);
 
-      log('API_GET_BTC_PRICE $btcPrice');
-
       emit(state.copyWith(btcPrice: (btcPrice)));
     } catch (e) {
-      log(e.toString());
-      if (e is DioError) {
-        log('e.response?.data');
-      }
+      if (e is DioError) {}
     }
   }
 
@@ -67,7 +57,7 @@ class OffersCubit extends Cubit<OffersState> {
 
       final dolarText = response.data['compra'].replaceAll(',', '.');
       double dolar = double.parse(dolarText);
-      log('DOLAAR: $dolar');
+
       emit(state.copyWith(dolarModal: dolar));
     } catch (e) {
       if (e is DioError) {}
