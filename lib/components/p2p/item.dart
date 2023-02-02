@@ -58,9 +58,9 @@ class _P2pOfferItemState extends State<P2pOfferItem> {
 
   Widget Content(volumeIsAllowed) {
     Map offer = widget.offer;
-    String banksList = offer['banks'] ?? 'No banks';
+    String banksList = offer['online_provider'] ?? 'No banks';
 
-    double tempPrice = double.parse(offer['temp_price'] ?? '0');
+    double tempPrice = double.parse(offer['temp_price_usd'] ?? '0');
 
     bool isVip =
         offer['username'].toString().toLowerCase().contains('anproweb');
@@ -123,7 +123,7 @@ class _P2pOfferItemState extends State<P2pOfferItem> {
                                             suffix: dollarCharacter(),
                                             textStyle: const TextStyle(
                                                 fontWeight: FontWeight.bold),
-                                            number: price),
+                                            number: tempPrice),
                                         Text(
                                           offer['profile']['username'],
                                           style: const TextStyle(
@@ -131,7 +131,7 @@ class _P2pOfferItemState extends State<P2pOfferItem> {
                                               color: Color(0xff1A5FFF)),
                                         ),
                                         Text(
-                                          '(${offer['trade_count']}; ${offer['feedback_score']}%)',
+                                          '(${offer['profile']['trade_count']}; ${offer['profile']['feedback_score']}%)',
                                           style: const TextStyle(
                                               fontSize: 6,
                                               color: Color(0xff1A5FFF),
@@ -161,7 +161,7 @@ class _P2pOfferItemState extends State<P2pOfferItem> {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Text(
-                                    '${formatNumberNoDecimals(offer['min'])} - ${formatNumberNoDecimals(offer['max'])}',
+                                    '${formatNumberNoDecimals(offer['min_amount'])} - ${formatNumberNoDecimals(offer['max_amount'])}',
                                     style: const TextStyle(
                                         fontWeight: FontWeight.bold,
                                         fontSize: 16),

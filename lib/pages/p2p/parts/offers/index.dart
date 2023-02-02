@@ -3,14 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gorilla_hash/bloc/cubit/offers_cubit.dart';
 import 'package:gorilla_hash/components/p2p/item.dart';
 
-class OffersList extends StatefulWidget {
+class OffersList extends StatelessWidget {
   const OffersList({super.key});
 
-  @override
-  State<OffersList> createState() => _OffersListState();
-}
-
-class _OffersListState extends State<OffersList> {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<OffersCubit, OffersState>(

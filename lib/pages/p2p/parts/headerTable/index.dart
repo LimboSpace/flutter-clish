@@ -1,15 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:gorilla_hash/components/elements/inputs/search.dart';
-import 'package:gorilla_hash/utilities/shortcuts/index.dart';
 
-class HeaderTable extends StatefulWidget {
+class HeaderTable extends StatelessWidget {
   const HeaderTable({super.key});
 
-  @override
-  State<HeaderTable> createState() => _HeaderTableState();
-}
-
-class _HeaderTableState extends State<HeaderTable> {
   @override
   Widget build(BuildContext context) {
     TextEditingController searchController = TextEditingController();
@@ -18,27 +11,33 @@ class _HeaderTableState extends State<HeaderTable> {
       margin: const EdgeInsets.only(top: 20, left: 10, right: 10),
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(15),
-          color: const Color(0xffFFF8E7)),
+          color: Color.fromARGB(45, 248, 188, 24)),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Container(
-            padding: const EdgeInsets.only(top: 10, bottom: 10),
-            child: InputSearch(
-                width: mq(context).width * 0.45,
-                controller: searchController,
-                onSubmit: () {}),
+          Expanded(
+            flex: 3,
+            child: Container(
+              padding: const EdgeInsets.only(top: 10, bottom: 10),
+              child: const Center(
+                  child: Text(
+                'Cambio',
+                style: TextStyle(
+                    color: Color(0xffF8BB18), fontWeight: FontWeight.bold),
+              )),
+            ),
           ),
           Expanded(
             flex: 6,
             child: Container(
               padding: const EdgeInsets.only(top: 10, bottom: 10),
-              decoration: BoxDecoration(color: gc(context).surface),
+              decoration: BoxDecoration(color: const Color(0xffF8BB18)),
               child: const Center(
                   child: Text(
                 'Min - Max',
                 style: TextStyle(
-                    color: Color(0xffFFF8E7), fontWeight: FontWeight.bold),
+                    color: Color.fromARGB(255, 255, 255, 255),
+                    fontWeight: FontWeight.bold),
               )),
             ),
           ),
@@ -46,11 +45,11 @@ class _HeaderTableState extends State<HeaderTable> {
             flex: 3,
             child: Container(
               padding: const EdgeInsets.only(top: 10, bottom: 10),
-              child: Center(
+              child: const Center(
                   child: Text(
                 '%',
                 style: TextStyle(
-                    color: gc(context).surface, fontWeight: FontWeight.bold),
+                    color: Color(0xffF8BB18), fontWeight: FontWeight.bold),
               )),
             ),
           ),
