@@ -41,8 +41,12 @@ class _P2pOfferItemState extends State<P2pOfferItem> {
   Widget build(BuildContext context) {
     Map offer = widget.offer;
 
-    bool volumeIsAllowed = widget.minVolume != null &&
-        double.parse(offer['max']) > widget.minVolume!;
+    if (offer.isEmpty) return Container();
+
+    String maxAmunt = offer['max_amount'] ?? '0';
+
+    bool volumeIsAllowed = double.parse(maxAmunt) > widget.minVolume!;
+
     if (volumeIsAllowed) {
       return Content(volumeIsAllowed);
     } else if (volumeIsAllowed == false && widget.showInvalids == false) {
@@ -54,26 +58,30 @@ class _P2pOfferItemState extends State<P2pOfferItem> {
 
   Widget Content(volumeIsAllowed) {
     Map offer = widget.offer;
+    String banksList = offer['banks'] ?? 'No banks';
+
+    double tempPrice = double.parse(offer['temp_price'] ?? '0');
 
     bool isVip =
         offer['username'].toString().toLowerCase().contains('anproweb');
 
     double ganancie = calculateGananceP2P(
-        btcArs: double.parse(offer['price']),
+        btcArs: tempPrice,
         btcUsd: widget.btcPrice,
         dolarModal: widget.dolarModal);
 
     double price = calculatePriceOffer(
-      btcArs: double.parse(offer['price']),
+      btcArs: tempPrice,
       btcUsd: widget.btcPrice,
     );
-    double heightDouble = offer['banks'] != null && offer['banks'].length > 25
+
+    double heightDouble = banksList.length > 25
         ? mediaHeight(0.08, context)
         : mediaHeight(0.06, context);
 
     copyLink() {
-      copy(formatNumber(offer['price']), context,
-          text: '${formatNumber(offer['price'])} copiado!');
+      copy(formatNumber(tempPrice), context,
+          text: '${formatNumber(tempPrice)} copiado!');
     }
 
     return GestureDetector(
@@ -117,7 +125,7 @@ class _P2pOfferItemState extends State<P2pOfferItem> {
                                                 fontWeight: FontWeight.bold),
                                             number: price),
                                         Text(
-                                          offer['username'],
+                                          offer['profile']['username'],
                                           style: const TextStyle(
                                               fontSize: 8,
                                               color: Color(0xff1A5FFF)),
@@ -135,8 +143,8 @@ class _P2pOfferItemState extends State<P2pOfferItem> {
                                   Positioned(
                                     child: StatusOnline(
                                       radius: 4,
-                                      lastOnline:
-                                          DateTime.parse(offer['last_online']),
+                                      lastOnline: DateTime.parse(
+                                          offer['profile']['last_online']),
                                     ),
                                   )
                                 ],
@@ -162,7 +170,7 @@ class _P2pOfferItemState extends State<P2pOfferItem> {
                                     height: 5,
                                   ),
                                   Flexible(
-                                    child: Text(offer['banks'],
+                                    child: Text(banksList,
                                         style: TextStyle(
                                             color: greyText, fontSize: 10),
                                         textAlign: TextAlign.center),

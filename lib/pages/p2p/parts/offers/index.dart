@@ -1,35 +1,33 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gorilla_hash/bloc/cubit/offers_cubit.dart';
 import 'package:gorilla_hash/components/p2p/item.dart';
 
-class Offers extends StatefulWidget {
-  const Offers({super.key});
+class OffersList extends StatefulWidget {
+  const OffersList({super.key});
 
   @override
-  State<Offers> createState() => _OffersState();
+  State<OffersList> createState() => _OffersListState();
 }
 
-class _OffersState extends State<Offers> {
+class _OffersListState extends State<OffersList> {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<OffersCubit, OffersState>(
       builder: (context, state) {
-        log('STATE: ${state.allOffers.toString()}');
-
-        return Column(
-          children: [
-            for (dynamic i = 0; i < state.allOffers?.length; i++)
-              (P2pOfferItem(
-                offer: state.allOffers![i],
-                btcPrice: state.btcPrice,
-                dolarModal: state.dolarModal,
-                minVolume: state.minVolume,
-                showInvalids: state.showInvalids,
-              )),
-          ],
+        return SizedBox(
+          child: Column(
+            children: [
+              for (Map offer in state.allOffers)
+                (P2pOfferItem(
+                  offer: offer['data'],
+                  btcPrice: state.btcPrice,
+                  dolarModal: state.dolarModal,
+                  minVolume: state.minVolume,
+                  showInvalids: state.showInvalids,
+                )),
+            ],
+          ),
         );
       },
     );

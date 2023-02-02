@@ -42,7 +42,7 @@ formatNumber(number) {
   try {
     dynamic formatter = NumberFormat('#,###.00');
 
-    if (number.runtimeType.toString() == 'String') {
+    if (number is String) {
       if (number == '0') return '0.00';
       return formatter.format(double.parse(number));
     } else {

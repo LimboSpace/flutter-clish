@@ -14,6 +14,8 @@ class MathUtils {
 }
 
 calculateGananceP2P({btcArs, btcUsd, dolarModal}) {
+  if (btcUsd == 0) return 0.0;
+
   double result = 0;
   double dolarBtc = btcArs / btcUsd;
 
@@ -24,7 +26,8 @@ calculateGananceP2P({btcArs, btcUsd, dolarModal}) {
   return result;
 }
 
-calculatePriceOffer({btcArs, btcUsd}) {
+double calculatePriceOffer({btcArs, btcUsd}) {
+  if (btcUsd == 0) return 0.0;
   double result = 0;
 
   double dolarBtc = btcArs / btcUsd;

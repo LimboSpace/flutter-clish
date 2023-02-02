@@ -4,7 +4,6 @@ import 'package:gorilla_hash/bloc/cubit/offers_cubit.dart';
 import 'package:gorilla_hash/components/elements/BottomNavigation/index.dart';
 import 'package:gorilla_hash/config/routes/index.dart';
 import 'package:gorilla_hash/config/style/theme/index.dart';
-import 'package:gorilla_hash/pages/p2p/index.dart';
 
 void main() async {
 /*   await dotenv.load(fileName: ".env"); */

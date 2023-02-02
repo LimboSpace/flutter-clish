@@ -9,9 +9,9 @@ class OffersState extends Equatable {
     this.minVolume = 0,
     this.lastUpdate = 0,
   });
-  OffersState.init() : this(null);
+  OffersState.init() : this([]);
 
-  List? allOffers;
+  List allOffers;
   bool showInvalids;
   double btcPrice;
   double dolarModal;
@@ -37,5 +37,5 @@ class OffersState extends Equatable {
   }
 
   @override
-  List<Object> get props => [allOffers ?? ''];
+  List<Object> get props => [allOffers];
 }
