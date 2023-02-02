@@ -33,6 +33,8 @@ class _p2pScreenState extends State<p2pScreen> {
 
   void dispatchp2pScreen() async {
     await BlocProvider.of<OffersCubit>(context).getp2pOffers(context);
+    await BlocProvider.of<OffersCubit>(context).getbtcPrice(context);
+    await BlocProvider.of<OffersCubit>(context).getDolarModal(context);
   }
 
   @override
