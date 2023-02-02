@@ -1,4 +1,5 @@
 import 'dart:developer';
+import 'dart:ffi';
 
 import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
@@ -23,8 +24,10 @@ class OffersCubit extends Cubit<OffersState> {
           .get('https://localbitcoins.com/sell-bitcoins-online/ars/.json');
 
       List offerList = response.data['data']['ad_list'];
+      double minVolume = double.parse(response.data['data']['min_amount']);
 
       emit(state.copyWith(allOffers: offerList));
+      emit(state.copyWith(minVolume: minVolume));
       return response.data['data']['ad_list'];
     } catch (e) {
       if (e is DioError) {
@@ -40,10 +43,23 @@ class OffersCubit extends Cubit<OffersState> {
       Response response = await dio
           .get('https://api.binance.com/api/v1/ticker/price?symbol=BTCUSDC');
 
-      List offerList = response.data;
+      double btcPrice = response.data['price'];
 
-      emit(state.copyWith(allOffers: offerList));
-      return response.data['data']['ad_list'];
+      emit(state.copyWith(btcPrice: btcPrice));
+    } catch (e) {
+      if (e is DioError) {}
+    }
+  }
+
+  getDolarModal(context) async {
+    try {
+      Dio dio = getDio();
+
+      Response response = await dio
+          .get('https://mercados.ambito.com//dolar/informal/variacion');
+
+      double dolar = double.parse(response.data['compra']);
+      emit(state.copyWith(dolarModal: dolar));
     } catch (e) {
       if (e is DioError) {}
     }
