@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:gorilla_hash/services/index.dart';
 
 part 'offers_state.dart';
@@ -18,8 +19,9 @@ class OffersCubit extends Cubit<OffersState> {
     try {
       Dio dio = getDio();
 
-      Response response = await dio
-          .get('https://localbitcoins.com/sell-bitcoins-online/ars/.json');
+      String _getOffersApi = dotenv.env['API_GET_OFFERS'].toString();
+
+      Response response = await dio.get(_getOffersApi);
 
       List offerList = response.data?['data']?['ad_list'] ?? [];
 
@@ -41,9 +43,8 @@ class OffersCubit extends Cubit<OffersState> {
   getbtcPrice(context) async {
     try {
       Dio dio = getDio();
-
-      Response response = await dio
-          .get('https://api.binance.com/api/v1/ticker/price?symbol=BTCUSDC');
+      String _btcApi = dotenv.env['API_GET_BTC_PRICE'].toString();
+      Response response = await dio.get(_btcApi);
 
       double btcPrice = response.data['price'];
 
@@ -56,9 +57,8 @@ class OffersCubit extends Cubit<OffersState> {
   getDolarModal(context) async {
     try {
       Dio dio = getDio();
-
-      Response response = await dio
-          .get('https://mercados.ambito.com//dolar/informal/variacion');
+      String _dolarModalApi = dotenv.env['API_GET_DOLAR_MODAL'].toString();
+      Response response = await dio.get(_dolarModalApi);
 
       double dolar = double.parse(response.data['compra']);
       emit(state.copyWith(dolarModal: dolar));

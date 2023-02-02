@@ -1,5 +1,7 @@
 // ignore_for_file: non_constant_identifier_names, camel_case_types
 
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gorilla_hash/bloc/cubit/offers_cubit.dart';
@@ -23,13 +25,20 @@ class _p2pScreenState extends State<p2pScreen> {
   TextEditingController dollarPriceController = TextEditingController();
   TextEditingController relevantVolumeController = TextEditingController();
 
+  @override
+  void initState() {
+    dispatchp2pScreen();
+    super.initState();
+  }
+
   void dispatchp2pScreen() async {
     await BlocProvider.of<OffersCubit>(context).getp2pOffers(context);
+    await BlocProvider.of<OffersCubit>(context).getbtcPrice(context);
+    await BlocProvider.of<OffersCubit>(context).getDolarModal(context);
   }
 
   @override
   Widget build(BuildContext context) {
-    dispatchp2pScreen();
     return Scaffold(
       body: Page(),
     );
