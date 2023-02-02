@@ -39,54 +39,51 @@ class _p2pScreenState extends State<p2pScreen> {
     return BlocBuilder<OffersCubit, OffersState>(
       builder: (context, state) {
         return SafeArea(
-          child: Container(
-            padding: const EdgeInsets.only(top: 20, left: 15, right: 15),
-            child: SingleChildScrollView(
-              child: Column(
-                children: [
-                  const Header(),
-                  const HeaderTable(),
-                  const BitcoinPrice(),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  if (state.minVolume != 0)
-                    (Column(
-                      children: [
-                        Row(
-                          children: [
-                            const Text('Volumen relevante mínimo: '),
-                            Text(
-                              formatNumber(state.minVolume),
-                            )
-                          ],
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            Text('Ocultar los inválidos:',
-                                style: TextStyle(color: gc(context).primary)),
-                            Switch(
-                              value: state.showInvalids,
-                              onChanged: (boool) {
-                                setState(() {
-                                  state.showInvalids = !state.showInvalids;
-                                });
-                              },
-                              activeTrackColor: Colors.black,
-                              inactiveTrackColor: Colors.black,
-                              activeColor: gc(context).primary,
-                            ),
-                          ],
-                        )
-                      ],
-                    )),
-                  const OffersList(),
-                  const SizedBox(
-                    height: 100,
-                  ),
-                ],
-              ),
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                const Header(),
+                const HeaderTable(),
+                const BitcoinPrice(),
+                const SizedBox(
+                  height: 10,
+                ),
+                if (state.minVolume != 0)
+                  (Column(
+                    children: [
+                      Row(
+                        children: [
+                          const Text('Volumen relevante mínimo: '),
+                          Text(
+                            formatNumber(state.minVolume),
+                          )
+                        ],
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Text('Ocultar los inválidos:',
+                              style: TextStyle(color: gc(context).primary)),
+                          Switch(
+                            value: state.showInvalids,
+                            onChanged: (boool) {
+                              setState(() {
+                                state.showInvalids = !state.showInvalids;
+                              });
+                            },
+                            activeTrackColor: Colors.black,
+                            inactiveTrackColor: Colors.black,
+                            activeColor: gc(context).primary,
+                          ),
+                        ],
+                      )
+                    ],
+                  )),
+                const OffersList(),
+                const SizedBox(
+                  height: 100,
+                ),
+              ],
             ),
           ),
         );

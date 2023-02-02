@@ -4,42 +4,60 @@ import 'package:gorilla_hash/components/elements/statusOnline/container/index.da
 import 'package:gorilla_hash/utilities/shortcuts/index.dart';
 import 'package:gorilla_hash/utilities/styles/styles.dart';
 
-class Header extends StatefulWidget {
+class Header extends StatelessWidget {
   const Header({super.key});
 
   @override
-  State<Header> createState() => _HeaderState();
-}
-
-class _HeaderState extends State<Header> {
-  @override
   Widget build(BuildContext context) {
     return Container(
-      width: double.infinity,
-      height: 80,
-      decoration: const BoxDecoration(
-          color: Color(0xff5B67CA),
-          image: DecorationImage(
-            image: AssetImage("assets/icons/coinsbanner.svg"),
-            fit: BoxFit.cover,
-          )),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.end,
-        crossAxisAlignment: CrossAxisAlignment.start,
+      height: 90,
+      padding: const EdgeInsets.all(25),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Row(
             children: [
+              SvgPicture.asset(
+                'assets/icons/transactions.svg',
+                color: gc(context).primary,
+              ),
               const SizedBox(
                 width: 10,
               ),
               Text(
-                'Monedas',
-                style: titlePageStyle.copyWith(
-                  color: Colors.white,
-                ),
+                'Clishcoin',
+                style: titlePageStyle,
               )
             ],
           ),
+          Row(
+            children: [
+              const StatusOnlineContainer(),
+              const SizedBox(
+                width: 10,
+              ),
+              GestureDetector(
+                onTap: () {},
+                child: Container(
+                  width: 35,
+                  height: 35,
+                  decoration: BoxDecoration(
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(0.15),
+                          spreadRadius: 3,
+                          blurRadius: 5,
+                          offset: const Offset(0, 1),
+                        ),
+                      ],
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(5)),
+                  padding: const EdgeInsets.all(6),
+                  child: SvgPicture.asset('assets/icons/config.svg'),
+                ),
+              ),
+            ],
+          )
         ],
       ),
     );

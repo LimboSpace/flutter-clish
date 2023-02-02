@@ -5,14 +5,9 @@ import 'package:gorilla_hash/bloc/cubit/offers_cubit.dart';
 import 'package:gorilla_hash/components/animations/number/index.dart';
 import 'package:gorilla_hash/utilities/shortcuts/index.dart';
 
-class BitcoinPrice extends StatefulWidget {
+class BitcoinPrice extends StatelessWidget {
   const BitcoinPrice({super.key});
 
-  @override
-  State<BitcoinPrice> createState() => _BitcoinPriceState();
-}
-
-class _BitcoinPriceState extends State<BitcoinPrice> {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<OffersCubit, OffersState>(
