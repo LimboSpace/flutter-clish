@@ -28,8 +28,13 @@ class _p2pScreenState extends State<p2pScreen> {
   }
 
   @override
-  Widget build(BuildContext context) {
+  void initState() {
     dispatchp2pScreen();
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       body: Page(),
     );
