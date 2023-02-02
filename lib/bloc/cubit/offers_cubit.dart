@@ -70,10 +70,7 @@ class OffersCubit extends Cubit<OffersState> {
       log('DOLAAR: $dolar');
       emit(state.copyWith(dolarModal: dolar));
     } catch (e) {
-      log(e.toString());
-      if (e is DioError) {
-        log('e.response?.data');
-      }
+      if (e is DioError) {}
     }
   }
 }
