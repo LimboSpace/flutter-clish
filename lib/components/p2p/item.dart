@@ -66,8 +66,6 @@ class _P2pOfferItemState extends State<P2pOfferItem> {
     bool isVip =
         offer['username'].toString().toLowerCase().contains('anproweb');
 
-    log(' asd ${widget.dolarModal.toString()}');
-
     double ganancie = calculateGananceP2P(
         btcArs: tempPrice,
         btcUsd: widget.btcPrice,
