@@ -1,5 +1,6 @@
 // ignore_for_file: non_constant_identifier_names
 
+import 'dart:developer';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
@@ -60,10 +61,12 @@ class _P2pOfferItemState extends State<P2pOfferItem> {
     Map offer = widget.offer;
     String banksList = offer['online_provider'] ?? 'No banks';
 
-    double tempPrice = double.parse(offer['temp_price_usd'] ?? '0');
+    double tempPrice = double.parse(offer['temp_price_usd'] ?? 0.00);
 
     bool isVip =
         offer['username'].toString().toLowerCase().contains('anproweb');
+
+    log(' asd ${widget.dolarModal.toString()}');
 
     double ganancie = calculateGananceP2P(
         btcArs: tempPrice,

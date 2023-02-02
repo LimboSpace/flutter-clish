@@ -46,11 +46,16 @@ class OffersCubit extends Cubit<OffersState> {
       String _btcApi = dotenv.env['API_GET_BTC_PRICE'].toString();
       Response response = await dio.get(_btcApi);
 
-      double btcPrice = response.data['price'];
+      double btcPrice = double.parse(response.data['price']);
 
-      emit(state.copyWith(btcPrice: btcPrice));
+      log('API_GET_BTC_PRICE $btcPrice');
+
+      emit(state.copyWith(btcPrice: (btcPrice)));
     } catch (e) {
-      if (e is DioError) {}
+      log(e.toString());
+      if (e is DioError) {
+        log('e.response?.data');
+      }
     }
   }
 
@@ -60,10 +65,15 @@ class OffersCubit extends Cubit<OffersState> {
       String _dolarModalApi = dotenv.env['API_GET_DOLAR_MODAL'].toString();
       Response response = await dio.get(_dolarModalApi);
 
-      double dolar = double.parse(response.data['compra']);
+      final dolarText = response.data['compra'].replaceAll(',', '.');
+      double dolar = double.parse(dolarText);
+      log('DOLAAR: $dolar');
       emit(state.copyWith(dolarModal: dolar));
     } catch (e) {
-      if (e is DioError) {}
+      log(e.toString());
+      if (e is DioError) {
+        log('e.response?.data');
+      }
     }
   }
 }
