@@ -5,6 +5,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gorilla_hash/bloc/cubit/offers_cubit.dart';
+import 'package:gorilla_hash/components/elements/loading/screen_spinner.dart';
 import 'package:gorilla_hash/pages/p2p/parts/bitcoinPrice/index.dart';
 import 'package:gorilla_hash/pages/p2p/parts/header/index.dart';
 import 'package:gorilla_hash/pages/p2p/parts/headerTable/index.dart';
@@ -47,6 +48,11 @@ class _p2pScreenState extends State<p2pScreen> {
   Widget Page() {
     return BlocBuilder<OffersCubit, OffersState>(
       builder: (context, state) {
+        if (state.loading) {
+          return Center(
+            child: ScreenSpinner(),
+          );
+        }
         return SafeArea(
           child: SingleChildScrollView(
             child: Column(

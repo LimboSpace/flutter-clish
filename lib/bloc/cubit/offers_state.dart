@@ -4,6 +4,7 @@ class OffersState extends Equatable {
   OffersState(
     this.allOffers, {
     this.showInvalids = true,
+    this.loading = false,
     this.btcPrice = 0,
     this.dolarModal = 0,
     this.minVolume = 0,
@@ -13,6 +14,7 @@ class OffersState extends Equatable {
 
   List allOffers;
   bool showInvalids;
+  bool loading;
   double btcPrice;
   double dolarModal;
   double minVolume;
@@ -21,6 +23,7 @@ class OffersState extends Equatable {
   OffersState copyWith({
     List? allOffers,
     bool? showInvalids,
+    bool? loading,
     double? btcPrice,
     double? minVolume,
     int? lastUpdate,
@@ -29,6 +32,7 @@ class OffersState extends Equatable {
     return OffersState(
       allOffers ?? this.allOffers,
       showInvalids: showInvalids ?? this.showInvalids,
+      loading: loading ?? this.loading,
       btcPrice: btcPrice ?? this.btcPrice,
       dolarModal: dolarModal ?? this.dolarModal,
       minVolume: minVolume ?? this.minVolume,
@@ -37,6 +41,13 @@ class OffersState extends Equatable {
   }
 
   @override
-  List<Object> get props =>
-      [allOffers, showInvalids, btcPrice, minVolume, lastUpdate, dolarModal];
+  List<Object> get props => [
+        allOffers,
+        showInvalids,
+        loading,
+        btcPrice,
+        minVolume,
+        lastUpdate,
+        dolarModal
+      ];
 }

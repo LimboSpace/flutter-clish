@@ -17,8 +17,8 @@ class OffersCubit extends Cubit<OffersState> {
 
   Future<void> getp2pOffers(context) async {
     try {
+      emit(state.copyWith(loading: true));
       Dio dio = getDio();
-
       String _getOffersApi = dotenv.env['API_GET_OFFERS'].toString();
 
       Response response = await dio.get(_getOffersApi);
@@ -30,6 +30,7 @@ class OffersCubit extends Cubit<OffersState> {
 
       emit(state.copyWith(allOffers: offerList));
       emit(state.copyWith(minVolume: minVolume));
+      emit(state.copyWith(loading: false));
     } catch (e) {
       if (e is DioError) {}
     }
@@ -37,6 +38,7 @@ class OffersCubit extends Cubit<OffersState> {
 
   getbtcPrice(context) async {
     try {
+      emit(state.copyWith(loading: true));
       Dio dio = getDio();
       String _btcApi = dotenv.env['API_GET_BTC_PRICE'].toString();
       Response response = await dio.get(_btcApi);
@@ -44,6 +46,7 @@ class OffersCubit extends Cubit<OffersState> {
       double btcPrice = double.parse(response.data['price']);
 
       emit(state.copyWith(btcPrice: (btcPrice)));
+      emit(state.copyWith(loading: false));
     } catch (e) {
       if (e is DioError) {}
     }
@@ -51,6 +54,7 @@ class OffersCubit extends Cubit<OffersState> {
 
   getDolarModal(context) async {
     try {
+      emit(state.copyWith(loading: true));
       Dio dio = getDio();
       String _dolarModalApi = dotenv.env['API_GET_DOLAR_MODAL'].toString();
       Response response = await dio.get(_dolarModalApi);
@@ -59,6 +63,7 @@ class OffersCubit extends Cubit<OffersState> {
       double dolar = double.parse(dolarText);
 
       emit(state.copyWith(dolarModal: dolar));
+      emit(state.copyWith(loading: false));
     } catch (e) {
       if (e is DioError) {}
     }
