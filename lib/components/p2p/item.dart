@@ -62,18 +62,19 @@ class _P2pOfferItemState extends State<P2pOfferItem> {
     Map offer = widget.offer;
     String banksList = offer['online_provider'] ?? 'No banks';
 
-    double tempPrice = double.parse(offer['temp_price_usd'] ?? 0.00);
+    double btcArs = double.parse(offer['temp_price'] ?? 0.00);
 
     bool isVip =
         offer['username'].toString().toLowerCase().contains('anproweb');
 
     double ganancie = calculateGananceP2P(
-        btcArs: tempPrice,
-        btcUsd: widget.btcPrice,
-        dolarModal: widget.dolarModal);
+      btcArs: btcArs,
+      btcUsd: widget.btcPrice,
+      dolarModal: widget.dolarModal,
+    );
 
     double price = calculatePriceOffer(
-      btcArs: tempPrice,
+      btcArs: btcArs,
       btcUsd: widget.btcPrice,
     );
 
@@ -82,8 +83,8 @@ class _P2pOfferItemState extends State<P2pOfferItem> {
         : mediaHeight(0.06, context);
 
     copyLink() {
-      copy(formatNumber(tempPrice), context,
-          text: '${formatNumber(tempPrice)} copiado!');
+      copy(formatNumber(btcArs), context,
+          text: '${formatNumber(btcArs)} copiado!');
     }
 
     return GestureDetector(
