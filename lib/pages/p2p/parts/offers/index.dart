@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gorilla_hash/bloc/cubit/offers_cubit.dart';
 import 'package:gorilla_hash/components/p2p/item.dart';
+import 'package:gorilla_hash/utilities/shortcuts/index.dart';
 
 class OffersList extends StatelessWidget {
   const OffersList({super.key});
@@ -11,17 +12,18 @@ class OffersList extends StatelessWidget {
     return BlocBuilder<OffersCubit, OffersState>(
       builder: (context, state) {
         return SizedBox(
-          child: Column(
-            children: [
-              for (Map offer in state.allOffers)
-                (P2pOfferItem(
-                  offer: offer['data'],
-                  btcPrice: state.btcPrice,
-                  dolarModal: state.dolarModal,
-                  minVolume: state.minVolume,
-                  showInvalids: state.showInvalids,
-                )),
-            ],
+          height: mq(context).height,
+          child: ListView.builder(
+            itemCount: state.allOffers.length,
+            itemBuilder: (context, index) {
+              return P2pOfferItem(
+                offer: state.allOffers[index]['data'],
+                btcPrice: state.btcPrice,
+                dolarModal: state.dolarModal,
+                minVolume: state.minVolume,
+                showInvalids: state.showInvalids,
+              );
+            },
           ),
         );
       },
