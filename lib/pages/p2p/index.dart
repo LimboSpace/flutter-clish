@@ -12,6 +12,7 @@ import 'package:gorilla_hash/pages/p2p/parts/headerTable/index.dart';
 import 'package:gorilla_hash/pages/p2p/parts/offers/index.dart';
 import 'package:gorilla_hash/utilities/formatter/numbers/index.dart';
 import 'package:gorilla_hash/utilities/shortcuts/index.dart';
+import 'package:gorilla_hash/utilities/storage/index.dart';
 
 class p2pScreen extends StatefulWidget {
   Function? changeLoading;
@@ -36,6 +37,13 @@ class _p2pScreenState extends State<p2pScreen> {
     await BlocProvider.of<OffersCubit>(context).getp2pOffers(context);
     await BlocProvider.of<OffersCubit>(context).getbtcPrice(context);
     await BlocProvider.of<OffersCubit>(context).getDolarModal(context);
+
+    dynamic dollarModalRes = await readST('dollarmodal', 'double');
+
+    if (dollarModalRes != null && dollarModalRes != '') {
+      BlocProvider.of<OffersCubit>(context).setDolarModal(dollarModalRes);
+      dollarPriceController.text = dollarModalRes.toString();
+    }
   }
 
   @override

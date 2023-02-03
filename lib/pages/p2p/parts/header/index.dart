@@ -1,9 +1,14 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:gorilla_hash/bloc/cubit/offers_cubit.dart';
 import 'package:gorilla_hash/components/elements/statusOnline/container/index.dart';
 import 'package:gorilla_hash/components/p2p/modal/index.dart';
 import 'package:gorilla_hash/utilities/modals/show_modal.dart';
 import 'package:gorilla_hash/utilities/shortcuts/index.dart';
+import 'package:gorilla_hash/utilities/storage/index.dart';
 import 'package:gorilla_hash/utilities/styles/styles.dart';
 
 class Header extends StatelessWidget {
@@ -14,7 +19,25 @@ class Header extends StatelessWidget {
     TextEditingController dollarPriceController = TextEditingController();
     TextEditingController relevantVolumeController = TextEditingController();
 
-    filterOffers(String volume, String price) {}
+    filterOffers(String volume, String price) {
+      Navigator.pop(context);
+
+      if (volume.isNotEmpty) {
+        BlocProvider.of<OffersCubit>(context)
+            .setMinVolume(double.parse(volume));
+      } else {
+        BlocProvider.of<OffersCubit>(context).setMinVolume(0);
+      }
+
+      if (price.isNotEmpty) {
+        writeST('dollarmodal', double.parse(price), 'double');
+
+        BlocProvider.of<OffersCubit>(context)
+            .setDolarModal(double.parse(price));
+      } else {
+        BlocProvider.of<OffersCubit>(context).setDolarModal(200);
+      }
+    }
 
     openModalSetDollar() {
       openDialog(

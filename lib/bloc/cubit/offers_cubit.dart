@@ -68,4 +68,16 @@ class OffersCubit extends Cubit<OffersState> {
       if (e is DioError) {}
     }
   }
+
+  void toggleShowInvalids() {
+    emit(state.copyWith(showInvalids: !state.showInvalids));
+  }
+
+  void setMinVolume(double value) {
+    emit(state.copyWith(minVolume: value));
+  }
+
+  void setDolarModal(double value) {
+    emit(state.copyWith(dolarModal: value));
+  }
 }

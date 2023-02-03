@@ -46,7 +46,8 @@ class _P2pOfferItemState extends State<P2pOfferItem> {
 
     String maxAmunt = offer['max_amount'] ?? '0';
 
-    bool volumeIsAllowed = double.parse(maxAmunt) > widget.minVolume!;
+    bool volumeIsAllowed =
+        widget.minVolume != null && double.parse(maxAmunt) > widget.minVolume!;
 
     if (volumeIsAllowed) {
       return Content(volumeIsAllowed);
