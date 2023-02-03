@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gorilla_hash/components/elements/statusOnline/container/index.dart';
+import 'package:gorilla_hash/components/p2p/modal/index.dart';
+import 'package:gorilla_hash/utilities/modals/show_modal.dart';
 import 'package:gorilla_hash/utilities/shortcuts/index.dart';
 import 'package:gorilla_hash/utilities/styles/styles.dart';
 
@@ -9,6 +11,20 @@ class Header extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    TextEditingController dollarPriceController = TextEditingController();
+    TextEditingController relevantVolumeController = TextEditingController();
+
+    filterOffers(String volume, String price) {}
+
+    openModalSetDollar() {
+      openDialog(
+          context,
+          ModalSetDollar(
+              onSubmit: filterOffers,
+              dollarPriceController: dollarPriceController,
+              relevantVolumeController: relevantVolumeController));
+    }
+
     return Container(
       height: 90,
       padding: const EdgeInsets.all(25),
@@ -37,7 +53,7 @@ class Header extends StatelessWidget {
                 width: 10,
               ),
               GestureDetector(
-                onTap: () {},
+                onTap: openModalSetDollar,
                 child: Container(
                   width: 35,
                   height: 35,
