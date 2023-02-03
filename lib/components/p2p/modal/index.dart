@@ -94,8 +94,10 @@ class ModalSetDollar extends StatelessWidget {
                   width: mq(context).width * 0.33,
                   child: ButtonSolid(
                     onPressed: () {
-                      onSubmit(relevantVolumeController.text,
-                          dollarPriceController.text);
+                      onSubmit(
+                        relevantVolumeController.text,
+                        dollarPriceController.text,
+                      );
                     },
                     text: 'Aceptar',
                   )),

@@ -17,7 +17,7 @@ class BitcoinPrice extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              FaIcon(FontAwesomeIcons.bitcoin, color: gc(context).surface),
+              const FaIcon(FontAwesomeIcons.bitcoin, color: Colors.yellow),
               const SizedBox(
                 width: 5,
               ),
