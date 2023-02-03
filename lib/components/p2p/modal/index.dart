@@ -60,8 +60,10 @@ class ModalSetDollar extends StatelessWidget {
               hintText: 'Ingrese aqui el monto relevante',
               prefixIcon: Padding(
                 padding: const EdgeInsets.only(bottom: 10),
-                child: SvgPicture.asset('assets/icons/thunder.svg',
-                    height: 30, color: gc(context).surface),
+                child: SvgPicture.asset(
+                  'assets/icons/thunder.svg',
+                  height: 30,
+                ),
               ),
               hintStyle: TextStyle(
                   color: greyText, fontSize: 16, fontStyle: FontStyle.italic),
@@ -78,7 +80,7 @@ class ModalSetDollar extends StatelessWidget {
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Container(
+              SizedBox(
                 width: mq(context).width * 0.33,
                 child: ButtonSolid(
                   onPressed: () {
