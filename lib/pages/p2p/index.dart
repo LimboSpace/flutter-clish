@@ -90,9 +90,8 @@ class _p2pScreenState extends State<p2pScreen> {
                           Switch(
                             value: state.showInvalids,
                             onChanged: (boool) {
-                              setState(() {
-                                state.showInvalids = !state.showInvalids;
-                              });
+                              BlocProvider.of<OffersCubit>(context)
+                                  .toggleShowInvalids();
                             },
                             activeTrackColor: Colors.black,
                             inactiveTrackColor: Colors.black,
