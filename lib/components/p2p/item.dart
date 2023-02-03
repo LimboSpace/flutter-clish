@@ -66,8 +66,6 @@ class _P2pOfferItemState extends State<P2pOfferItem> {
     bool isVip =
         offer['username'].toString().toLowerCase().contains('anproweb');
 
-    log(' asd ${widget.dolarModal.toString()}');
-
     double ganancie = calculateGananceP2P(
         btcArs: tempPrice,
         btcUsd: widget.btcPrice,
@@ -122,11 +120,13 @@ class _P2pOfferItemState extends State<P2pOfferItem> {
                                       crossAxisAlignment:
                                           CrossAxisAlignment.center,
                                       children: [
-                                        NumberAnimation(
-                                            suffix: dollarCharacter(),
-                                            textStyle: const TextStyle(
-                                                fontWeight: FontWeight.bold),
-                                            number: tempPrice),
+                                        if (!ganancie.isNaN ||
+                                            !ganancie.isInfinite)
+                                          NumberAnimation(
+                                              suffix: dollarCharacter(),
+                                              textStyle: const TextStyle(
+                                                  fontWeight: FontWeight.bold),
+                                              number: price),
                                         Text(
                                           offer['profile']['username'],
                                           style: const TextStyle(
@@ -186,13 +186,14 @@ class _P2pOfferItemState extends State<P2pOfferItem> {
                             flex: 3,
                             child: Column(
                               children: [
-                                NumberAnimation(
-                                    suffix: '%',
-                                    number: ganancie,
-                                    textStyle: TextStyle(
-                                        color: greenLight,
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.bold)),
+                                if (!ganancie.isNaN || !ganancie.isInfinite)
+                                  NumberAnimation(
+                                      suffix: '%',
+                                      number: ganancie,
+                                      textStyle: TextStyle(
+                                          color: greenLight,
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.bold)),
                                 Text(
                                   'Ganancia',
                                   style: TextStyle(

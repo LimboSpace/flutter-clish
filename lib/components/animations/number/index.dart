@@ -17,7 +17,7 @@ class _NumberAnimationState extends State<NumberAnimation> {
   Widget build(BuildContext context) {
     return AnimatedFlipCounter(
       duration: const Duration(milliseconds: 1000),
-      value: widget.number,
+      value: widget.number as double,
       fractionDigits: 1,
       thousandSeparator: ',',
       decimalSeparator: '.',
