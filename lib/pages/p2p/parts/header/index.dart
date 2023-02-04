@@ -12,30 +12,42 @@ import 'package:gorilla_hash/utilities/storage/index.dart';
 import 'package:gorilla_hash/utilities/styles/styles.dart';
 
 class Header extends StatelessWidget {
-  const Header({super.key});
+  OffersState state;
+  Header({
+    super.key,
+    required this.state,
+  });
 
   @override
   Widget build(BuildContext context) {
     TextEditingController dollarPriceController = TextEditingController();
     TextEditingController relevantVolumeController = TextEditingController();
+    final OffersCubit offersCubit = BlocProvider.of<OffersCubit>(context);
 
     filterOffers(String volume, String price) {
       Navigator.pop(context);
 
       if (volume.isNotEmpty) {
-        BlocProvider.of<OffersCubit>(context)
-            .setMinVolume(double.parse(volume));
+        offersCubit.setMinVolume(double.parse(volume));
+
+        //filter offers by volume
+        List offers = state.allOffers
+            .where((element) =>
+                double.parse(element['data']['min_amount']) >=
+                double.parse(volume))
+            .toList();
+
+        offersCubit.setFilteredOffers(offers);
       } else {
-        BlocProvider.of<OffersCubit>(context).setMinVolume(0);
+        offersCubit.setMinVolume(0);
+        offersCubit.setFilteredOffers(state.allOffers);
       }
 
       if (price.isNotEmpty) {
         writeST('dollarmodal', double.parse(price), 'double');
-
-        BlocProvider.of<OffersCubit>(context)
-            .setDolarModal(double.parse(price));
+        offersCubit.setDolarModal(double.parse(price));
       } else {
-        BlocProvider.of<OffersCubit>(context).setDolarModal(200);
+        offersCubit.setDolarModal(200);
       }
     }
 

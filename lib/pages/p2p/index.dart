@@ -65,7 +65,7 @@ class _p2pScreenState extends State<p2pScreen> {
           child: SingleChildScrollView(
             child: Column(
               children: [
-                const Header(),
+                Header(state: state),
                 const HeaderTable(),
                 const BitcoinPrice(),
                 const SizedBox(

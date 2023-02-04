@@ -29,7 +29,10 @@ class OffersCubit extends Cubit<OffersState> {
           double.parse(response.data?['data']?['min_amount'] ?? '0');
 
       emit(state.copyWith(
-          allOffers: offerList, minVolume: minVolume, loading: false));
+          allOffers: offerList,
+          filteredOffers: offerList,
+          minVolume: minVolume,
+          loading: false));
     } catch (e) {
       if (e is DioError) {}
     }
@@ -76,5 +79,9 @@ class OffersCubit extends Cubit<OffersState> {
 
   void setDolarModal(double value) {
     emit(state.copyWith(dolarModal: value));
+  }
+
+  void setFilteredOffers(List value) {
+    emit(state.copyWith(filteredOffers: value));
   }
 }

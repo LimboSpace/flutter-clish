@@ -48,7 +48,7 @@ class _P2pOfferItemState extends State<P2pOfferItem> {
 
     bool volumeIsAllowed =
         widget.minVolume != null && double.parse(maxAmunt) > widget.minVolume!;
-    log('volumeIsAllowed: ${widget.showInvalids}');
+
     if (volumeIsAllowed) {
       return Content(volumeIsAllowed);
     } else if (volumeIsAllowed == false && widget.showInvalids == false) {

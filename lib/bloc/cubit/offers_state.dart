@@ -3,6 +3,7 @@ part of 'offers_cubit.dart';
 class OffersState extends Equatable {
   OffersState(
     this.allOffers, {
+    this.filteredOffers = const [],
     this.showInvalids = true,
     this.loading = false,
     this.btcPrice = 0,
@@ -13,6 +14,7 @@ class OffersState extends Equatable {
   OffersState.init() : this([]);
 
   List allOffers;
+  List filteredOffers;
   bool showInvalids;
   bool loading;
   double btcPrice;
@@ -22,6 +24,7 @@ class OffersState extends Equatable {
 
   OffersState copyWith({
     List? allOffers,
+    List? filteredOffers,
     bool? showInvalids,
     bool? loading,
     double? btcPrice,
@@ -31,6 +34,7 @@ class OffersState extends Equatable {
   }) {
     return OffersState(
       allOffers ?? this.allOffers,
+      filteredOffers: filteredOffers ?? this.filteredOffers,
       showInvalids: showInvalids ?? this.showInvalids,
       loading: loading ?? this.loading,
       btcPrice: btcPrice ?? this.btcPrice,
@@ -43,6 +47,7 @@ class OffersState extends Equatable {
   @override
   List<Object> get props => [
         allOffers,
+        filteredOffers,
         showInvalids,
         loading,
         btcPrice,
