@@ -30,7 +30,6 @@ class Header extends StatelessWidget {
       if (volume.isNotEmpty) {
         offersCubit.setMinVolume(double.parse(volume));
 
-        //filter offers by volume
         List offers = state.allOffers
             .where((element) =>
                 double.parse(element['data']['min_amount']) >=
