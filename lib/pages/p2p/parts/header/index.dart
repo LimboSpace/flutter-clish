@@ -16,12 +16,15 @@ class Header extends StatelessWidget {
   Header({
     super.key,
     required this.state,
+    required this.dollarPriceController,
+    required this.relevantVolumeController,
   });
+
+  final TextEditingController dollarPriceController;
+  final TextEditingController relevantVolumeController;
 
   @override
   Widget build(BuildContext context) {
-    TextEditingController dollarPriceController = TextEditingController();
-    TextEditingController relevantVolumeController = TextEditingController();
     final OffersCubit offersCubit = BlocProvider.of<OffersCubit>(context);
 
     filterOffers(String volume, String price) {
