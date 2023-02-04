@@ -1,20 +1,57 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:gorilla_hash/bloc/cubit/offers_cubit.dart';
 import 'package:gorilla_hash/components/elements/statusOnline/container/index.dart';
 import 'package:gorilla_hash/components/p2p/modal/index.dart';
 import 'package:gorilla_hash/utilities/modals/show_modal.dart';
 import 'package:gorilla_hash/utilities/shortcuts/index.dart';
+import 'package:gorilla_hash/utilities/storage/index.dart';
 import 'package:gorilla_hash/utilities/styles/styles.dart';
 
 class Header extends StatelessWidget {
-  const Header({super.key});
+  OffersState state;
+  Header({
+    super.key,
+    required this.state,
+    required this.dollarPriceController,
+    required this.relevantVolumeController,
+  });
+
+  final TextEditingController dollarPriceController;
+  final TextEditingController relevantVolumeController;
 
   @override
   Widget build(BuildContext context) {
-    TextEditingController dollarPriceController = TextEditingController();
-    TextEditingController relevantVolumeController = TextEditingController();
+    final OffersCubit offersCubit = BlocProvider.of<OffersCubit>(context);
 
-    filterOffers(String volume, String price) {}
+    filterOffers(String volume, String price) {
+      Navigator.pop(context);
+
+      if (volume.isNotEmpty) {
+        offersCubit.setMinVolume(double.parse(volume));
+
+        List offers = state.allOffers
+            .where((element) =>
+                double.parse(element['data']['min_amount']) >=
+                double.parse(volume))
+            .toList();
+
+        offersCubit.setFilteredOffers(offers);
+      } else {
+        offersCubit.setMinVolume(0);
+        offersCubit.setFilteredOffers(state.allOffers);
+      }
+
+      if (price.isNotEmpty) {
+        writeST('dollarmodal', double.parse(price), 'double');
+        offersCubit.setDolarModal(double.parse(price));
+      } else {
+        offersCubit.setDolarModal(200);
+      }
+    }
 
     openModalSetDollar() {
       openDialog(

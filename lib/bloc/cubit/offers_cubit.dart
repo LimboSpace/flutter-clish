@@ -28,9 +28,11 @@ class OffersCubit extends Cubit<OffersState> {
       double minVolume =
           double.parse(response.data?['data']?['min_amount'] ?? '0');
 
-      emit(state.copyWith(allOffers: offerList));
-      emit(state.copyWith(minVolume: minVolume));
-      emit(state.copyWith(loading: false));
+      emit(state.copyWith(
+          allOffers: offerList,
+          filteredOffers: offerList,
+          minVolume: minVolume,
+          loading: false));
     } catch (e) {
       if (e is DioError) {}
     }
@@ -45,8 +47,7 @@ class OffersCubit extends Cubit<OffersState> {
 
       double btcPrice = double.parse(response.data['price']);
 
-      emit(state.copyWith(btcPrice: (btcPrice)));
-      emit(state.copyWith(loading: false));
+      emit(state.copyWith(btcPrice: (btcPrice), loading: false));
     } catch (e) {
       if (e is DioError) {}
     }
@@ -62,10 +63,25 @@ class OffersCubit extends Cubit<OffersState> {
       final dolarText = response.data['compra'].replaceAll(',', '.');
       double dolar = double.parse(dolarText);
 
-      emit(state.copyWith(dolarModal: dolar));
-      emit(state.copyWith(loading: false));
+      emit(state.copyWith(dolarModal: dolar, loading: false));
     } catch (e) {
       if (e is DioError) {}
     }
+  }
+
+  void toggleShowInvalids() {
+    emit(state.copyWith(showInvalids: !state.showInvalids));
+  }
+
+  void setMinVolume(double value) {
+    emit(state.copyWith(minVolume: value));
+  }
+
+  void setDolarModal(double value) {
+    emit(state.copyWith(dolarModal: value));
+  }
+
+  void setFilteredOffers(List value) {
+    emit(state.copyWith(filteredOffers: value));
   }
 }

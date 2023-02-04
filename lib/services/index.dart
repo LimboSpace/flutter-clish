@@ -18,7 +18,7 @@ Future<void> onRequest(
   RequestOptions request,
   RequestInterceptorHandler handler,
 ) async {
-  String? accessToken = await readST(LocalStorageFields.accessToken);
+  String? accessToken = await readST(LocalStorageFields.accessToken, 'string');
 
   request.headers['Authorization'] = 'Bearer $accessToken';
 
