@@ -56,7 +56,6 @@ class _p2pScreenState extends State<p2pScreen> {
   Widget Page() {
     return BlocBuilder<OffersCubit, OffersState>(
       builder: (context, state) {
-        log(state.filteredOffers.length.toString());
         if (state.loading) {
           return Center(
             child: ScreenSpinner(),

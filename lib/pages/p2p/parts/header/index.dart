@@ -36,7 +36,6 @@ class Header extends StatelessWidget {
             .toList();
 
         offersCubit.setFilteredOffers(offers);
-        log(offers.toString());
       } else {
         offersCubit.setMinVolume(0);
         offersCubit.setFilteredOffers(state.allOffers);
