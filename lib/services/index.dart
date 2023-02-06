@@ -5,8 +5,6 @@ import 'package:gorilla_hash/utilities/storage/index.dart';
 Dio getDio() {
   Dio dio = Dio();
 
-/* dio.interceptors.add(dioInterceptors()); */
-
   return dio;
 }
 
