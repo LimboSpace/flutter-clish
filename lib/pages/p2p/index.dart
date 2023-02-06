@@ -56,62 +56,65 @@ class _p2pScreenState extends State<p2pScreen> {
   Widget Page() {
     return BlocBuilder<OffersCubit, OffersState>(
       builder: (context, state) {
+        log(state.filteredOffers.length.toString());
         if (state.loading) {
           return Center(
             child: ScreenSpinner(),
           );
-        }
-        return SafeArea(
-          child: SingleChildScrollView(
-            child: Column(
-              children: [
-                Header(
+        } else {
+          return SafeArea(
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  Header(
                     state: state,
                     dollarPriceController: dollarPriceController,
-                    relevantVolumeController: relevantVolumeController),
-                const HeaderTable(),
-                const BitcoinPrice(),
-                const SizedBox(
-                  height: 10,
-                ),
-                if (state.minVolume != 0)
-                  (Column(
-                    children: [
-                      Row(
-                        children: [
-                          const Text('Volumen relevante mínimo: '),
-                          Text(
-                            formatNumber(state.minVolume),
-                          )
-                        ],
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Text('Ocultar los inválidos:',
-                              style: TextStyle(color: gc(context).primary)),
-                          Switch(
-                            value: state.showInvalids,
-                            onChanged: (boool) {
-                              BlocProvider.of<OffersCubit>(context)
-                                  .toggleShowInvalids();
-                            },
-                            activeTrackColor: Colors.black,
-                            inactiveTrackColor: Colors.black,
-                            activeColor: gc(context).primary,
-                          ),
-                        ],
-                      )
-                    ],
-                  )),
-                const OffersList(),
-                const SizedBox(
-                  height: 100,
-                ),
-              ],
+                    relevantVolumeController: relevantVolumeController,
+                  ),
+                  const HeaderTable(),
+                  const BitcoinPrice(),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  if (state.minVolume != 0)
+                    (Column(
+                      children: [
+                        Row(
+                          children: [
+                            const Text('Volumen relevante mínimo: '),
+                            Text(
+                              formatNumber(state.minVolume),
+                            )
+                          ],
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Text('Ocultar los inválidos:',
+                                style: TextStyle(color: gc(context).primary)),
+                            Switch(
+                              value: state.showInvalids,
+                              onChanged: (boool) {
+                                BlocProvider.of<OffersCubit>(context)
+                                    .toggleShowInvalids();
+                              },
+                              activeTrackColor: Colors.black,
+                              inactiveTrackColor: Colors.black,
+                              activeColor: gc(context).primary,
+                            ),
+                          ],
+                        )
+                      ],
+                    )),
+                  const OffersList(),
+                  const SizedBox(
+                    height: 100,
+                  ),
+                ],
+              ),
             ),
-          ),
-        );
+          );
+        }
       },
     );
   }

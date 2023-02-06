@@ -11,10 +11,6 @@ part 'offers_state.dart';
 class OffersCubit extends Cubit<OffersState> {
   OffersCubit() : super(OffersState.init());
 
-  String getAllOffers() {
-    return 'All Offers';
-  }
-
   Future<void> getp2pOffers(context) async {
     try {
       emit(state.copyWith(loading: true));
@@ -25,14 +21,8 @@ class OffersCubit extends Cubit<OffersState> {
 
       List offerList = response.data?['data']?['ad_list'] ?? [];
 
-      double minVolume =
-          double.parse(response.data?['data']?['min_amount'] ?? '0');
-
       emit(state.copyWith(
-          allOffers: offerList,
-          filteredOffers: offerList,
-          minVolume: minVolume,
-          loading: false));
+          allOffers: offerList, filteredOffers: offerList, loading: false));
     } catch (e) {
       if (e is DioError) {}
     }
@@ -83,5 +73,9 @@ class OffersCubit extends Cubit<OffersState> {
 
   void setFilteredOffers(List value) {
     emit(state.copyWith(filteredOffers: value));
+  }
+
+  void setLoading(bool value) {
+    emit(state.copyWith(loading: value));
   }
 }
