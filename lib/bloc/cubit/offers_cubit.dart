@@ -43,11 +43,8 @@ class OffersCubit extends Cubit<OffersState> {
       final body = {
         "asset": "USDT",
         "fiat": "ARS",
-        "currency": "ARS",
         "merchantCheck": true,
         "page": 1,
-        "payTypes": ["BANK"],
-        "publisherType": null,
         "rows": 20,
         "tradeType": "SELL"
       };
