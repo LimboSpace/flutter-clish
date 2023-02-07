@@ -72,6 +72,7 @@ class _P2pOfferItemState extends State<BinanceP2pOfferItem> {
       btcArs: btcArs,
       btcUsd: widget.btcPrice,
       dolarModal: widget.dolarModal,
+      isBinance: true,
     );
 
     double price = calculatePriceOffer(
@@ -129,7 +130,7 @@ class _P2pOfferItemState extends State<BinanceP2pOfferItem> {
                                               suffix: dollarCharacter(),
                                               textStyle: const TextStyle(
                                                   fontWeight: FontWeight.bold),
-                                              number: price),
+                                              number: btcArs),
                                         Text(
                                           offer['advNo'],
                                           style: const TextStyle(
@@ -166,7 +167,7 @@ class _P2pOfferItemState extends State<BinanceP2pOfferItem> {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Text(
-                                    '${formatNumberNoDecimals(offer['minSingleTransQuantity'])} - ${formatNumberNoDecimals(offer['maxSingleTransQuantity'])}',
+                                    '${formatNumberNoDecimals(offer['minSingleTransAmount'])} - ${formatNumberNoDecimals(offer['maxSingleTransAmount'])}',
                                     style: const TextStyle(
                                         fontWeight: FontWeight.bold,
                                         fontSize: 16),

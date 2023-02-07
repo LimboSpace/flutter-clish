@@ -37,11 +37,12 @@ class _p2pScreenState extends State<binanceOffersScreen> {
 
   void dispatchp2pScreen() async {
     BlocProvider.of<OffersCubit>(context).setLoading(true);
-    Timer.periodic(const Duration(seconds: 3), (e) async {
+    Timer.periodic(const Duration(seconds: 5), (e) async {
       await BlocProvider.of<OffersCubit>(context).getBinanceOffers(context);
-      await BlocProvider.of<OffersCubit>(context).getDolarModal(context);
       await BlocProvider.of<OffersCubit>(context).getbtcPrice(context);
     });
+
+    await BlocProvider.of<OffersCubit>(context).getDolarModal(context);
 
     dynamic dollarModalRes = await readST('dollarmodal', 'double');
     if (dollarModalRes != null && dollarModalRes != '') {

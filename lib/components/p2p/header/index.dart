@@ -29,16 +29,25 @@ class Header extends StatelessWidget {
     filterOffers(String volume, String price) {
       if (volume.isNotEmpty) {
         offersCubit.setMinVolume(double.parse(volume));
+
         List offers = state.allOffers
             .where((element) =>
                 double.parse(element['data']['min_amount'] ?? '0') >=
                 double.parse(volume))
             .toList();
 
+        List binanceOffersFilter = state.binanceOffers
+            .where((element) =>
+                double.parse(element['adv']['minSingleTransAmount'] ?? '0') >=
+                double.parse(volume))
+            .toList();
+
         offersCubit.setFilteredOffers(offers);
+        offersCubit.setBinanceFilteredOffers(binanceOffersFilter);
       } else {
         offersCubit.setMinVolume(0);
         offersCubit.setFilteredOffers(state.allOffers);
+        offersCubit.setBinanceFilteredOffers(state.binanceOffers);
       }
 
       if (price.isNotEmpty) {

@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 class MathUtils {
   double calculatePercentaje({required num percentaje, required num amount}) {
     double result = (percentaje / 100) * amount;
@@ -13,8 +15,18 @@ class MathUtils {
   }
 }
 
-calculateGananceP2P({btcArs, btcUsd, dolarModal}) {
+calculateGananceP2P({btcArs, btcUsd, dolarModal, isBinance = false}) {
   if (btcUsd == 0) return 0.0;
+  if (isBinance == true) {
+    double result = 0;
+    double dolarBtc = (btcArs * btcUsd) / btcUsd;
+
+    result = dolarBtc * 1.01;
+
+    result = (((result / dolarModal) - 1) * 100) * -1;
+
+    return result;
+  }
 
   double result = 0;
   double dolarBtc = btcArs / btcUsd;
