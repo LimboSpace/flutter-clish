@@ -13,6 +13,8 @@ import 'package:gorilla_hash/utilities/styles/styles.dart';
 
 class Header extends StatelessWidget {
   OffersState state;
+  TextEditingController dollarPriceController;
+  TextEditingController relevantVolumeController;
   Header({
     super.key,
     required this.state,
@@ -20,22 +22,16 @@ class Header extends StatelessWidget {
     required this.relevantVolumeController,
   });
 
-  final TextEditingController dollarPriceController;
-  final TextEditingController relevantVolumeController;
-
   @override
   Widget build(BuildContext context) {
     final OffersCubit offersCubit = BlocProvider.of<OffersCubit>(context);
 
     filterOffers(String volume, String price) {
-      Navigator.pop(context);
-
       if (volume.isNotEmpty) {
         offersCubit.setMinVolume(double.parse(volume));
-
         List offers = state.allOffers
             .where((element) =>
-                double.parse(element['data']['min_amount']) >=
+                double.parse(element['data']['min_amount'] ?? '0') >=
                 double.parse(volume))
             .toList();
 
@@ -51,6 +47,7 @@ class Header extends StatelessWidget {
       } else {
         offersCubit.setDolarModal(200);
       }
+      Navigator.pop(context);
     }
 
     openModalSetDollar() {

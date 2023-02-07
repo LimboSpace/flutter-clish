@@ -4,16 +4,13 @@ import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:gorilla_hash/models/localBitcoins/index.dart';
 import 'package:gorilla_hash/services/index.dart';
 
 part 'offers_state.dart';
 
 class OffersCubit extends Cubit<OffersState> {
   OffersCubit() : super(OffersState.init());
-
-  String getAllOffers() {
-    return 'All Offers';
-  }
 
   Future<void> getp2pOffers(context) async {
     try {
@@ -23,17 +20,17 @@ class OffersCubit extends Cubit<OffersState> {
 
       Response response = await dio.get(_getOffersApi);
 
-      List offerList = response.data?['data']?['ad_list'] ?? [];
+      Map<String, dynamic> offerList = response.data ?? {};
 
-      double minVolume =
-          double.parse(response.data?['data']?['min_amount'] ?? '0');
+      LocalBitcoins modelOffers = LocalBitcoins?.fromJson(offerList);
 
       emit(state.copyWith(
-          allOffers: offerList,
-          filteredOffers: offerList,
-          minVolume: minVolume,
+          allOffers: offerList['data']['ad_list'],
+          filteredOffers: offerList['data']['ad_list'],
           loading: false));
-    } catch (e) {
+    } catch (e, track) {
+      log(e.toString());
+      log(track.toString());
       if (e is DioError) {}
     }
   }
@@ -83,5 +80,9 @@ class OffersCubit extends Cubit<OffersState> {
 
   void setFilteredOffers(List value) {
     emit(state.copyWith(filteredOffers: value));
+  }
+
+  void setLoading(bool value) {
+    emit(state.copyWith(loading: value));
   }
 }
