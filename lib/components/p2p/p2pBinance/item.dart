@@ -79,9 +79,6 @@ class _P2pOfferItemState extends State<BinanceP2pOfferItem> {
       btcUsd: widget.btcPrice,
     );
 
-    log('price');
-    log(price.toString());
-
     double heightDouble = banksList.length > 25
         ? mediaHeight(0.08, context)
         : mediaHeight(0.06, context);
