@@ -1,5 +1,6 @@
 // ignore_for_file: non_constant_identifier_names, camel_case_types
 
+import 'dart:async';
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
@@ -30,20 +31,24 @@ class _p2pScreenState extends State<p2pScreen> {
   @override
   void initState() {
     dispatchp2pScreen();
+
     super.initState();
   }
 
   void dispatchp2pScreen() async {
-    await BlocProvider.of<OffersCubit>(context).getp2pOffers(context);
-    await BlocProvider.of<OffersCubit>(context).getbtcPrice(context);
-    await BlocProvider.of<OffersCubit>(context).getDolarModal(context);
+    BlocProvider.of<OffersCubit>(context).setLoading(true);
+    Timer.periodic(const Duration(seconds: 3), (e) async {
+      await BlocProvider.of<OffersCubit>(context).getbtcPrice(context);
+      await BlocProvider.of<OffersCubit>(context).getDolarModal(context);
+      await BlocProvider.of<OffersCubit>(context).getp2pOffers(context);
+    });
 
     dynamic dollarModalRes = await readST('dollarmodal', 'double');
-
     if (dollarModalRes != null && dollarModalRes != '') {
       BlocProvider.of<OffersCubit>(context).setDolarModal(dollarModalRes);
       dollarPriceController.text = dollarModalRes.toString();
     }
+    BlocProvider.of<OffersCubit>(context).setLoading(false);
   }
 
   @override
