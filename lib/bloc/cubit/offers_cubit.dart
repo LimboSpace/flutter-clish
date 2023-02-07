@@ -54,8 +54,7 @@ class OffersCubit extends Cubit<OffersState> {
       List offerList = response.data['data'] ?? [];
 
       emit(state.copyWith(
-        binanceOffers: offerList,
-      ));
+          binanceOffers: offerList, filteredBinanceOffers: offerList));
     } catch (e, track) {
       log(e.toString());
       log(track.toString());
@@ -112,6 +111,10 @@ class OffersCubit extends Cubit<OffersState> {
 
   void setFilteredOffers(List value) {
     emit(state.copyWith(filteredOffers: value));
+  }
+
+  void setBinanceFilteredOffers(List value) {
+    emit(state.copyWith(filteredBinanceOffers: value));
   }
 
   void setLoading(bool value) {

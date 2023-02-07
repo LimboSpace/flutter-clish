@@ -19,10 +19,10 @@ class OffersList extends StatelessWidget {
           return SizedBox(
             height: mq(context).height,
             child: ListView.builder(
-              itemCount: state.binanceOffers.length,
+              itemCount: state.filteredBinanceOffers.length,
               itemBuilder: (context, index) {
                 return BinanceP2pOfferItem(
-                  offer: state.binanceOffers[index]['adv'],
+                  offer: state.filteredBinanceOffers[index]['adv'],
                   btcPrice: state.btcPrice,
                   dolarModal: state.dolarModal,
                   minVolume: state.minVolume,
