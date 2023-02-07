@@ -8,6 +8,8 @@ showToast(context, String mode, String text, int? seconds) {
     case 'success':
       MotionToast.success(
           height: 50,
+          width: double.infinity,
+          padding: const EdgeInsets.symmetric(horizontal: 20.0),
           toastDuration: Duration(seconds: seconds == null ? 1 : seconds),
           description: Text(text,
               style: const TextStyle(
@@ -17,6 +19,8 @@ showToast(context, String mode, String text, int? seconds) {
     case 'error':
       MotionToast.error(
           height: 50,
+          width: double.infinity,
+          padding: const EdgeInsets.symmetric(horizontal: 20.0),
           toastDuration: Duration(seconds: seconds == null ? 1 : seconds),
           description: Text(text,
               style: const TextStyle(
