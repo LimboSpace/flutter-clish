@@ -74,9 +74,7 @@ class OffersCubit extends Cubit<OffersState> {
 
       double btcPrice = double.parse(response.data['price']);
 
-      emit(state.copyWith(
-        btcPrice: btcPrice,
-      ));
+      emit(state.copyWith(btcPrice: (btcPrice), loading: false));
     } catch (e) {
       if (e is DioError) {}
     }
