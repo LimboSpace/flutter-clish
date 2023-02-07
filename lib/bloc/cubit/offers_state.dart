@@ -4,6 +4,7 @@ class OffersState extends Equatable {
   OffersState(
     this.allOffers, {
     this.filteredOffers = const [],
+    this.binanceOffers = const [],
     this.showInvalids = true,
     this.loading = false,
     this.btcPrice = 0,
@@ -15,6 +16,7 @@ class OffersState extends Equatable {
 
   List allOffers;
   List filteredOffers;
+  List binanceOffers;
   bool showInvalids;
   bool loading;
   double btcPrice;
@@ -25,6 +27,7 @@ class OffersState extends Equatable {
   OffersState copyWith({
     List? allOffers,
     List? filteredOffers,
+    List? binanceOffers,
     bool? showInvalids,
     bool? loading,
     double? btcPrice,
@@ -35,6 +38,7 @@ class OffersState extends Equatable {
     return OffersState(
       allOffers ?? this.allOffers,
       filteredOffers: filteredOffers ?? this.filteredOffers,
+      binanceOffers: binanceOffers ?? this.binanceOffers,
       showInvalids: showInvalids ?? this.showInvalids,
       loading: loading ?? this.loading,
       btcPrice: btcPrice ?? this.btcPrice,
@@ -48,6 +52,7 @@ class OffersState extends Equatable {
   List<Object> get props => [
         allOffers,
         filteredOffers,
+        binanceOffers,
         showInvalids,
         loading,
         btcPrice,

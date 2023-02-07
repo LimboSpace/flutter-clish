@@ -15,16 +15,16 @@ import 'package:gorilla_hash/utilities/formatter/numbers/index.dart';
 import 'package:gorilla_hash/utilities/shortcuts/index.dart';
 import 'package:gorilla_hash/utilities/storage/index.dart';
 
-class p2pScreen extends StatefulWidget {
+class binanceOffersScreen extends StatefulWidget {
   Function? changeLoading;
 
-  p2pScreen({super.key, this.changeLoading});
+  binanceOffersScreen({super.key, this.changeLoading});
 
   @override
-  State<p2pScreen> createState() => _p2pScreenState();
+  State<binanceOffersScreen> createState() => _p2pScreenState();
 }
 
-class _p2pScreenState extends State<p2pScreen> {
+class _p2pScreenState extends State<binanceOffersScreen> {
   TextEditingController dollarPriceController = TextEditingController();
   TextEditingController relevantVolumeController = TextEditingController();
 
@@ -38,10 +38,9 @@ class _p2pScreenState extends State<p2pScreen> {
   void dispatchp2pScreen() async {
     BlocProvider.of<OffersCubit>(context).setLoading(true);
     Timer.periodic(const Duration(seconds: 3), (e) async {
-      await BlocProvider.of<OffersCubit>(context).getbtcPrice(context);
       await BlocProvider.of<OffersCubit>(context).getBinanceOffers(context);
       await BlocProvider.of<OffersCubit>(context).getDolarModal(context);
-      await BlocProvider.of<OffersCubit>(context).getp2pOffers(context);
+      await BlocProvider.of<OffersCubit>(context).getbtcPrice(context);
     });
 
     dynamic dollarModalRes = await readST('dollarmodal', 'double');
@@ -49,6 +48,7 @@ class _p2pScreenState extends State<p2pScreen> {
       BlocProvider.of<OffersCubit>(context).setDolarModal(dollarModalRes);
       dollarPriceController.text = dollarModalRes.toString();
     }
+
     BlocProvider.of<OffersCubit>(context).setLoading(false);
   }
 
@@ -111,7 +111,9 @@ class _p2pScreenState extends State<p2pScreen> {
                         )
                       ],
                     )),
-                  const OffersList(),
+                  const OffersList(
+                    isBinance: true,
+                  ),
                   const SizedBox(
                     height: 100,
                   ),

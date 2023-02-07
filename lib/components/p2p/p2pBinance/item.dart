@@ -14,13 +14,13 @@ import 'package:gorilla_hash/utilities/formatter/numbers/index.dart';
 import 'package:gorilla_hash/utilities/math/index.dart';
 import 'package:gorilla_hash/utilities/shortcuts/index.dart';
 
-class P2pOfferItem extends StatefulWidget {
+class BinanceP2pOfferItem extends StatefulWidget {
   Map offer;
   double btcPrice;
   double dolarModal;
   bool? showInvalids;
   double? minVolume;
-  P2pOfferItem(
+  BinanceP2pOfferItem(
       {super.key,
       this.minVolume,
       this.showInvalids,
@@ -29,10 +29,10 @@ class P2pOfferItem extends StatefulWidget {
       required this.dolarModal});
 
   @override
-  State<P2pOfferItem> createState() => _P2pOfferItemState();
+  State<BinanceP2pOfferItem> createState() => _P2pOfferItemState();
 }
 
-class _P2pOfferItemState extends State<P2pOfferItem> {
+class _P2pOfferItemState extends State<BinanceP2pOfferItem> {
   @override
   void initState() {
     super.initState();
@@ -44,7 +44,7 @@ class _P2pOfferItemState extends State<P2pOfferItem> {
 
     if (offer.isEmpty) return Container();
 
-    String maxAmunt = offer['max_amount'] ?? '0';
+    String maxAmunt = offer['maxSingleTransAmount'] ?? '0';
 
     bool volumeIsAllowed =
         widget.minVolume != null && double.parse(maxAmunt) > widget.minVolume!;
@@ -60,9 +60,10 @@ class _P2pOfferItemState extends State<P2pOfferItem> {
 
   Widget Content(volumeIsAllowed) {
     Map offer = widget.offer;
-    String banksList = offer['online_provider'] ?? 'No banks';
+    String banksList =
+        offer['tradeMethods'][0]['tradeMethodShortName'] ?? 'No banks';
 
-    double btcArs = double.parse(offer['temp_price'] ?? 0.00);
+    double btcArs = double.parse(offer['price'] ?? 0.00);
 
     bool isVip =
         offer['username'].toString().toLowerCase().contains('anproweb');
@@ -130,14 +131,13 @@ class _P2pOfferItemState extends State<P2pOfferItem> {
                                                   fontWeight: FontWeight.bold),
                                               number: price),
                                         Text(
-                                          offer['profile']['username'] ??
-                                              offer['advNo'],
+                                          offer['advNo'],
                                           style: const TextStyle(
                                               fontSize: 8,
                                               color: Color(0xff1A5FFF)),
                                         ),
                                         Text(
-                                          '(${offer['profile']['trade_count'] ?? offer['tradableQuantity']}; ${offer['profile']['feedback_score'] ?? offer['commissionRate']}%)',
+                                          '(${offer['tradableQuantity']}; ${offer['commissionRate']}%)',
                                           style: const TextStyle(
                                               fontSize: 6,
                                               color: Color(0xff1A5FFF),
@@ -149,8 +149,7 @@ class _P2pOfferItemState extends State<P2pOfferItem> {
                                   Positioned(
                                     child: StatusOnline(
                                       radius: 4,
-                                      lastOnline: DateTime.parse(
-                                          offer['profile']['last_online']),
+                                      lastOnline: DateTime.now(),
                                     ),
                                   )
                                 ],
@@ -167,7 +166,7 @@ class _P2pOfferItemState extends State<P2pOfferItem> {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Text(
-                                    '${formatNumberNoDecimals(offer['min_amount'])} - ${formatNumberNoDecimals(offer['max_amount'])}',
+                                    '${formatNumberNoDecimals(offer['minSingleTransQuantity'])} - ${formatNumberNoDecimals(offer['maxSingleTransQuantity'])}',
                                     style: const TextStyle(
                                         fontWeight: FontWeight.bold,
                                         fontSize: 16),

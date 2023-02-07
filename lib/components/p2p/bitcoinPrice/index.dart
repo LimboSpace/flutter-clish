@@ -1,9 +1,10 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:gorilla_hash/bloc/cubit/offers_cubit.dart';
 import 'package:gorilla_hash/components/animations/number/index.dart';
-import 'package:gorilla_hash/utilities/shortcuts/index.dart';
 
 class BitcoinPrice extends StatelessWidget {
   const BitcoinPrice({super.key});
