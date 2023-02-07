@@ -41,7 +41,7 @@ class Header extends StatelessWidget {
                 double.parse(element['adv']['minSingleTransAmount'] ?? '0') >=
                 double.parse(volume))
             .toList();
-        log(binanceOffersFilter.toString());
+
         offersCubit.setFilteredOffers(offers);
         offersCubit.setBinanceFilteredOffers(binanceOffersFilter);
       } else {
