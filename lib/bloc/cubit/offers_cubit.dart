@@ -4,6 +4,7 @@ import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:gorilla_hash/models/localBitcoins/index.dart';
 import 'package:gorilla_hash/services/index.dart';
 
 part 'offers_state.dart';
@@ -19,11 +20,17 @@ class OffersCubit extends Cubit<OffersState> {
 
       Response response = await dio.get(_getOffersApi);
 
-      List offerList = response.data?['data']?['ad_list'] ?? [];
+      Map<String, dynamic> offerList = response.data ?? {};
+
+      LocalBitcoins modelOffers = LocalBitcoins?.fromJson(offerList);
 
       emit(state.copyWith(
-          allOffers: offerList, filteredOffers: offerList, loading: false));
-    } catch (e) {
+          allOffers: offerList['data']['ad_list'],
+          filteredOffers: offerList['data']['ad_list'],
+          loading: false));
+    } catch (e, track) {
+      log(e.toString());
+      log(track.toString());
       if (e is DioError) {}
     }
   }
