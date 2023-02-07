@@ -72,6 +72,7 @@ class _P2pOfferItemState extends State<BinanceP2pOfferItem> {
       btcArs: btcArs,
       btcUsd: widget.btcPrice,
       dolarModal: widget.dolarModal,
+      isBinance: true,
     );
 
     double price = calculatePriceOffer(
