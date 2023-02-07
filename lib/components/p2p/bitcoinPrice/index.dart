@@ -13,7 +13,6 @@ class BitcoinPrice extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<OffersCubit, OffersState>(
       builder: (context, state) {
-        log(state.btcPrice.toString());
         return Container(
           margin: const EdgeInsets.only(top: 10),
           child: Row(
