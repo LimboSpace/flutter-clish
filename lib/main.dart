@@ -5,6 +5,7 @@ import 'package:gorilla_hash/bloc/cubit/offers_cubit.dart';
 
 import 'package:gorilla_hash/config/style/theme/index.dart';
 import 'package:gorilla_hash/pages/binanceOffers/index.dart';
+import 'package:gorilla_hash/pages/containerPages/index.dart';
 import 'package:gorilla_hash/pages/p2p/index.dart';
 
 void main() async {
@@ -33,7 +34,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: getThemeData(),
-      home: binanceOffersScreen(),
+      home: ContainerScreens(),
     );
   }
 }
