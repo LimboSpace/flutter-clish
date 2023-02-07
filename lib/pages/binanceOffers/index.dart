@@ -41,6 +41,7 @@ class _p2pScreenState extends State<binanceOffersScreen> {
       await BlocProvider.of<OffersCubit>(context).getBinanceOffers(context);
       await BlocProvider.of<OffersCubit>(context).getbtcPrice(context);
     });
+
     await BlocProvider.of<OffersCubit>(context).getDolarModal(context);
 
     dynamic dollarModalRes = await readST('dollarmodal', 'double');

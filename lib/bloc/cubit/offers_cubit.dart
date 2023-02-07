@@ -22,10 +22,14 @@ class OffersCubit extends Cubit<OffersState> {
       Map<String, dynamic> offerList = response.data ?? {};
 
       LocalBitcoins modelOffers = LocalBitcoins?.fromJson(offerList);
-
+      if (state.filteredOffers == [] || state.filteredOffers.length < 1) {
+        return emit(state.copyWith(
+          allOffers: offerList['data']['ad_list'],
+          filteredOffers: offerList['data']['ad_list'],
+        ));
+      }
       emit(state.copyWith(
         allOffers: offerList['data']['ad_list'],
-        filteredOffers: offerList['data']['ad_list'],
       ));
     } catch (e, track) {
       log(e.toString());
@@ -53,8 +57,13 @@ class OffersCubit extends Cubit<OffersState> {
 
       List offerList = response.data['data'] ?? [];
 
-      emit(state.copyWith(
-          binanceOffers: offerList, filteredBinanceOffers: offerList));
+      if (state.filteredBinanceOffers == [] ||
+          state.filteredBinanceOffers.length < 1) {
+        return emit(state.copyWith(
+            binanceOffers: offerList, filteredBinanceOffers: offerList));
+      } else {
+        emit(state.copyWith(binanceOffers: offerList));
+      }
     } catch (e, track) {
       log(e.toString());
       log(track.toString());
