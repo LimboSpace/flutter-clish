@@ -34,6 +34,38 @@ class OffersCubit extends Cubit<OffersState> {
     }
   }
 
+  Future<void> getBinanceOffers(context) async {
+    try {
+      Dio dio = getDio();
+      String _getBinanceOffers =
+          dotenv.env['API_GET_BINANCE_OFFERS'].toString();
+
+      final body = {
+        "asset": "USDT",
+        "fiat": "ARS",
+        "currency": "ARS",
+        "merchantCheck": true,
+        "page": 1,
+        "payTypes": ["BANK"],
+        "publisherType": null,
+        "rows": 20,
+        "tradeType": "SELL"
+      };
+
+      Response response = await dio.post(_getBinanceOffers, data: body);
+
+      List offerList = response.data['data'] ?? [];
+
+      emit(state.copyWith(
+        binanceOffers: offerList,
+      ));
+    } catch (e, track) {
+      log(e.toString());
+      log(track.toString());
+      if (e is DioError) {}
+    }
+  }
+
   getbtcPrice(context) async {
     try {
       Dio dio = getDio();
@@ -43,7 +75,7 @@ class OffersCubit extends Cubit<OffersState> {
       double btcPrice = double.parse(response.data['price']);
 
       emit(state.copyWith(
-        btcPrice: (btcPrice),
+        btcPrice: btcPrice,
       ));
     } catch (e) {
       if (e is DioError) {}
@@ -65,6 +97,10 @@ class OffersCubit extends Cubit<OffersState> {
     } catch (e) {
       if (e is DioError) {}
     }
+  }
+
+  void resetAllOffers() {
+    emit(state.copyWith(allOffers: [], filteredOffers: []));
   }
 
   void toggleShowInvalids() {
